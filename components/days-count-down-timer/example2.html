@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <!-- Add style/CSS -->
+    <style>
+      body {
+        text-align: center;
+        font-family: sans-serif;
+        font-weight: 100;
+      }
+
+      #clockdiv {
+        display: flex;
+        margin: 0 auto;
+        gap: 60px;
+        border: solid 1px;
+        padding: 30px;
+        border-radius: 10px;
+        width: fit-content;
+      }
+
+      #clockdiv div > span {
+        font-size: 32px;
+        font-weight: 500;
+      }
+
+      .smalltext {
+        margin-top: 20px;
+        font-size: 20px;
+      }
+    </style>
+  </head>
+  <body>
+    <!-- Title or heading -->
+    <h1>Countdown Clock</h1>
+    <div id="clockdiv">
+      <div>
+        <!-- Show No. of days -->
+        <span class="days" id="day"></span>
+        <div class="smalltext">Days</div>
+      </div>
+      <div>
+        <!-- Show no.of hours -->
+        <span class="hours" id="hour"></span>
+        <div class="smalltext">Hours</div>
+      </div>
+      <div>
+        <!-- Show no. of minutes -->
+        <span class="minutes" id="minute"></span>
+        <div class="smalltext">Minutes</div>
+      </div>
+      <div>
+        <!-- Show seconds -->
+        <span class="seconds" id="second"></span>
+        <div class="smalltext">Seconds</div>
+      </div>
+    </div>
+    <p id="demo"></p>
+
+    <!-- Adding JavaScript code -->
+    <script>
+      // Getting formated date from date string
+      let deadline = new Date("dec 31, 2025 15:37:25").getTime();
+
+      // Calling defined function at certain interval
+      let x = setInterval(function () {
+        // Getting current date and time in required format
+        let now = new Date().getTime();
+
+        // Calculating difference
+        let t = deadline - now;
+
+        // Getting values of days,hours,minutes, seconds
+        let days = Math.floor(t / (1000 * 60 * 60 * 24));
+        let hours = Math.floor((t % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+        let minutes = Math.floor((t % (1000 * 60 * 60)) / (1000 * 60));
+        let seconds = Math.floor((t % (1000 * 60)) / 1000);
+
+        // Show the output time
+        document.getElementById("day").innerHTML = days;
+        document.getElementById("hour").innerHTML = hours;
+        document.getElementById("minute").innerHTML = minutes;
+        document.getElementById("second").innerHTML = seconds;
+
+        // Show overtime output
+        if (t < 0) {
+          clearInterval(x);
+          document.getElementById("demo").innerHTML = "TIME UP";
+          document.getElementById("day").innerHTML = "0";
+          document.getElementById("hour").innerHTML = "0";
+          document.getElementById("minute").innerHTML = "0";
+          document.getElementById("second").innerHTML = "0";
+        }
+      }, 1000);
+    </script>
+  </body>
+</html>
